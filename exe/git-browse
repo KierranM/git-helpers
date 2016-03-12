@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+require 'git/helpers'
+require 'optparse'
+
+OptionParser.new do |opts|
+  opts.banner = "Git-Helpers git browse\n"\
+                "Opens the default browser to the optionally specified remote (default 'origin'), at the optional branch/tree/commit\n"\
+                'Usage: git browse [remote] [branch/tree/commit]'
+  opts.on_tail '-h', '--help', 'Shows this help message' do
+    puts opts
+    exit 0
+  end
+  opts.on_tail '-v', '--version', 'Shows the version of git-helpers' do
+    puts "Git-Helpers version #{Git::Helpers::VERSION}"
+    exit 0
+  end
+end.parse!
+
+remote = ARGV.shift unless ARGV.empty?
+tree = ARGV.shift unless ARGV.empty?
+
+if remote.nil?
+  Git::Helpers.browse
+elsif tree.nil?
+  Git::Helpers.browse Dir.pwd, remote
+else
+  Git::Helpers.browse Dir.pwd, remote, tree
+end
