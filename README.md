@@ -22,6 +22,14 @@ Running `git update` will pull down the latest changes for your current branch
 from the upstream remote (or origin if you don't have an upstream), and pushes
 the changes to your origin (or not at all if it was pulled from origin).
 
+### Browse
+Running `git browse` will open the current repo in your web browser to the repository
+page at the current working branch. You can specify the remote if you wish to
+browse a different one in the format `git browse [remote]`. If you wish to view a
+specific branch/tag/commit then you can specify the tree after `remote` in the
+format `git browse [remote] [tree]`.
+*Note: To use a commit as a tree you must use the full commit hash* 
+
 ## Development
 
 After checking out the repo, run `bundle` to install dependencies. Then, run `bundle exec rake spec` to run the tests.
