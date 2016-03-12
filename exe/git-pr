@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+require 'git/helpers'
+require 'optparse'
+
+OptionParser.new do |opts|
+  opts.banner = "Git-Helpers git pr\n"\
+                "Opens the default browser to a pull request creation window (only works for Github currently)\n"\
+                "Usages: git pr\n"\
+                "        git pr target_remote\n"\
+                "        git pr target_remote target_branch\n"\
+                '        git pr target_remote/target_branch source_remote/source_branch'
+  opts.on_tail '-h', '--help', 'Shows this help message' do
+    puts opts
+    exit 0
+  end
+  opts.on_tail '-v', '--version', 'Shows the version of git-helpers' do
+    puts "Git-Helpers version #{Git::Helpers::VERSION}"
+    exit 0
+  end
+end.parse!
+
+target = ARGV.shift unless ARGV.empty?
+source = ARGV.shift unless ARGV.empty?
+
+if target.nil?
+  Git::Helpers.pull_request
+else
+  target_remote, target_branch = Git::Helpers::Utils.split_remote_string(target)
+  if source.nil?
+    Git::Helpers.pull_request Dir.pwd, target_remote, target_branch
+  else
+    source_remote, source_branch = Git::Helpers::Utils.split_remote_string(source)
+    if target_branch.nil?
+      Git::Helpers.pull_request Dir.pwd, target_remote, source_remote
+    else
+      Git::Helpers.pull_request Dir.pwd, target_remote, target_branch, source_remote, source_branch
+
+    end
+  end
+end

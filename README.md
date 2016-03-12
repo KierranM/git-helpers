@@ -28,7 +28,18 @@ page at the current working branch. You can specify the remote if you wish to
 browse a different one in the format `git browse [remote]`. If you wish to view a
 specific branch/tag/commit then you can specify the tree after `remote` in the
 format `git browse [remote] [tree]`.
-*Note: To use a commit as a tree you must use the full commit hash* 
+*Note: To use a commit as a tree you must use the full commit hash*
+
+### PR (Pull Request)
+Running `git pr` or one of its other forms will open a new pull request window
+in your default web browser.
+*Note: only works on GitHub remotes currently*
+
+Forms:
+* `git pr` - Opens the comparison between upstream and origin for the current branch
+* `git pr target_remote` - Opens the comparison between `target_remote` and origin for the current branch
+* `git pr target_remote target_branch` - Opens the comparison between `target_remote` at the `target_branch` and origin at the current branch
+* `git pr target_remote/target_branch source_remote/source_branch` - Opens the comparison between `target_remote` at the `target_branch` and `source_remote` at the `source_branch`
 
 ## Development
 

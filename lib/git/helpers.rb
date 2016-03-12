@@ -1,3 +1,5 @@
 require 'git/helpers/version'
+require 'git/helpers/utils'
 require 'git/helpers/update'
 require 'git/helpers/browse'
+require 'git/helpers/pull_request'

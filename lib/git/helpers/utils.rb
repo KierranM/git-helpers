@@ -33,6 +33,26 @@ module Git
           url
         end
       end
+
+      # Splits a remote/branch string into its component parts
+      # @param str [String] String to split
+      # @return [Array<String>] remote, branch
+      def self.split_remote_string(str)
+        first_slash = str.index('/')
+        if first_slash.nil?
+          return str, nil
+        else
+          return str[0..first_slash-1], str[first_slash+1..-1]
+        end
+      end
+
+      # Gets the true name for a remote
+      # @param remote [Git::Remote] The remote to get the true name for
+      # @return [String] The true name of the remote, pulled from the url
+      def self.true_name(remote)
+        transform_url(remote.url) =~ %r{^https://.*?/(.*?)/.*$}
+        Regexp.last_match 1
+      end
     end
   end
 end
