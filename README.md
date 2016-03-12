@@ -1,40 +1,37 @@
-# Git::Helpers
+# Git-Helpers
 
 [![Build Status](https://travis-ci.org/KierranM/git-helpers.svg?branch=master)](https://travis-ci.org/KierranM/git-helpers) [![Code Climate](https://codeclimate.com/github/KierranM/git-helpers/badges/gpa.svg)](https://codeclimate.com/github/KierranM/git-helpers) [![Dependency Status](https://gemnasium.com/KierranM/git-helpers.svg)](https://gemnasium.com/KierranM/git-helpers) [![Documentation Coverage](http://inch-ci.org/github/kierranm/git-helpers.svg?branch=master)](http://inch-ci.org/github/kierranm/git-helpers?branch=master)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/git/helpers`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Git-Helpers is a small library of commands to extend `git` to help improve your git workflow
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'git-helpers'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install it using:
 
     $ gem install git-helpers
 
 ## Usage
 
-TODO: Write usage instructions here
+Thanks to the way `git` finds extension commands on the path, once the gem is installed
+all of the commands are available in the usual `git <command>` manner.
+
+## Available Commands
+
+### Update
+Running `git update` will pull down the latest changes for your current branch
+from the upstream remote (or origin if you don't have an upstream), and pushes
+the changes to your origin (or not at all if it was pulled from origin).
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bundle` to install dependencies. Then, run `bundle exec rake spec` to run the tests.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then push your changes to your fork, and create a pull request into [KierranM/git-helpers](https://github.com/KierranM/git-helpers). Once merged a release will be
+created and the gem pushed to upstream
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/git-helpers.
+Bug reports and pull requests are welcome on GitHub at https://github.com/KierranM/git-helpers.
 
 
 ## License
