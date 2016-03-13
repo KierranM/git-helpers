@@ -63,4 +63,41 @@ describe Git::Helpers::Utils do
       end
     end
   end
+
+  describe '#split_remote_string' do
+    context 'when given a string with just the remote name' do
+      let(:test_string) { 'upstream' }
+      it 'returns the input as the first return value, nil as the second' do
+        expect(subject.split_remote_string(test_string)).to eq [test_string, nil]
+      end
+    end
+
+    context 'when given a string containing a remote name and branch' do
+      let(:test_string) { 'upstream/test_branch' }
+      it 'splits the remote and branch name, and returns them' do
+        expect(subject.split_remote_string(test_string)).to eq ['upstream', 'test_branch']
+      end
+    end
+
+    context 'when given a string containing a remote name and a branch name that contains /\'s' do
+      let(:test_string) { 'upstream/feature/test_branch' }
+      it 'splits the remote and branch name correctly, perserving the slash in branch name' do
+        expect(subject.split_remote_string(test_string)).to eq ['upstream', 'feature/test_branch']
+      end
+    end
+  end
+
+  describe '#true_name' do
+    let(:remote_mock) { double('Git::Remote') }
+    let(:transformed_url) { 'https://github.com/test_user/test' }
+
+    before :each do
+      allow(Git::Helpers::Utils).to receive(:transform_url).and_return transformed_url
+      allow(remote_mock).to receive(:url)
+    end
+
+    it 'returns the correct name for a remote' do
+      expect(subject.true_name(remote_mock)).to eq 'test_user'
+    end
+  end
 end
