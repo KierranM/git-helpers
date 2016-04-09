@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+require 'git/helpers'
+require 'optparse'
+
+OptionParser.new do |opts|
+  opts.banner = "Git-Helpers git upstream\n"\
+                "Creates a read-only upstream remote for the given user\n"\
+                'Usage: git upstream <USER>'
+  opts.on_tail '-h', '--help', 'Shows this help message' do
+    puts opts
+    exit 0
+  end
+  opts.on_tail '-v', '--version', 'Shows the version of git-helpers' do
+    puts "Git-Helpers version #{Git::Helpers::VERSION}"
+    exit 0
+  end
+end.parse!
+
+Git::Helpers.create_upstream ARGV.shift

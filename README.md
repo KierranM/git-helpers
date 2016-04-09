@@ -41,6 +41,10 @@ Forms:
 * `git pr target_remote target_branch` - Opens the comparison between `target_remote` at the `target_branch` and origin at the current branch
 * `git pr target_remote/target_branch source_remote/source_branch` - Opens the comparison between `target_remote` at the `target_branch` and `source_remote` at the `source_branch`
 
+### Upstream
+Running `git upstream <USER>` on a repository (that doesn't already have an upstream),
+will create a read-only `upstream` remote using the existing `origin` remote's URL
+
 ## Development
 
 After checking out the repo, run `bundle` to install dependencies. Then, run `bundle exec rake spec` to run the tests.
