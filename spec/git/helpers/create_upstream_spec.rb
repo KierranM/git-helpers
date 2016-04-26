@@ -38,7 +38,17 @@ describe Git::Helpers do
       let(:repo_dir) { '/test_dir' }
       it 'adds a new read-only upstream' do
         allow(Git).to receive(:open).and_return git_mock
+        allow(Git::Helpers::Utils).to receive(:remote?).and_return false
         expect(git_mock).to receive(:add_remote).with('upstream', 'git://github.com/test-user/test')
+        subject.create_upstream upstream_user, Dir.pwd, false
+      end
+    end
+
+    context 'when an upstream already exists' do
+      it 'does nothing' do
+        expect(git_mock).not_to receive(:add_remote)
+        upstream_mock = double('Git::Remote')
+        allow(Git::Helpers::Utils).to receive(:remotes_hash).and_return(remote => remote_mock, 'upstream' => upstream_mock)
         subject.create_upstream upstream_user, Dir.pwd, false
       end
     end
